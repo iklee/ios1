@@ -26,5 +26,29 @@
 		<key>locationInStore</key>
 		<string>locationInStore1</string>
 	</dict>
+	<dict>
+		<key>title</key>
+		<string>title2</string>
+		<key>artist</key>
+		<string>artist2</string>
+		<key>summary</key>
+		<string>summary2</string>
+		<key>price</key>
+		<integer>2</integer>
+		<key>locationInStore</key>
+		<string>locationInStore2</string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>title3</string>
+		<key>artist</key>
+		<string>artist3</string>
+		<key>summary</key>
+		<string>summary3</string>
+		<key>price</key>
+		<integer>3</integer>
+		<key>locationInStore</key>
+		<string>locationInStore3</string>
+	</dict>
 </array>
 </plist>
