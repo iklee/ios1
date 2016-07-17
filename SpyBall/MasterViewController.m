@@ -9,9 +9,14 @@
 #import "MasterViewController.h"
 #import "DetailViewController.h"
 
+#import "MyAlbum.h"
+#import "MyAlbumDataController.h"
+
+
 @interface MasterViewController ()
 
 @property NSMutableArray *objects;
+@property (nonatomic, strong) MyAlbumDataController * albumDataController;
 @end
 
 @implementation MasterViewController
@@ -19,11 +24,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    /*
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     self.detailViewController = (DetailViewController *)[[self.splitViewController.viewControllers lastObject] topViewController];
+     */
+}
+
+- (void) awakeFromNib{
+    [super awakeFromNib];
+    self.albumDataController = [[MyAlbumDataController alloc] init];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -36,6 +48,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
 - (void)insertNewObject:(id)sender {
     if (!self.objects) {
         self.objects = [[NSMutableArray alloc] init];
@@ -44,7 +57,10 @@
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
     [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
+*/
 
+ 
+ 
 #pragma mark - Segues
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -65,14 +81,20 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.objects.count;
+    //return self.objects.count;
+    return [self.albumDataController albumCount];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
 
-    NSDate *object = self.objects[indexPath.row];
-    cell.textLabel.text = [object description];
+    //NSDate *object = self.objects[indexPath.row];
+    //cell.textLabel.text = [object description];
+    
+    MyAlbum * album = [self.albumDataController albumAtIndex:indexPath.row];
+    cell.textLabel.text = album.title;
+    
+    
     return cell;
 }
 
@@ -81,6 +103,7 @@
     return YES;
 }
 
+/*
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [self.objects removeObjectAtIndex:indexPath.row];
@@ -89,5 +112,6 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
     }
 }
+ */
 
 @end
